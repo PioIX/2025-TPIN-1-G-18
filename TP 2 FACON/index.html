@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TP2 - CarraBank - Home Banking</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+
+<body>
+
+
+    <div>
+        <nav class="navbar navbar-dark bg-dark sticky-top">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">TP2 - CarraBank - Home Banking - Alumnos: Iván Oshiro y Nicolás Vázquez</a>
+
+                <!-- Botón menú hamburguesa -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu"
+                    aria-controls="offcanvasMenu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Offcanvas lateral derecho -->
+        <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasMenu"
+            aria-labelledby="offcanvasMenuLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasMenuLabel">Menú</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                    aria-label="Cerrar"></button>
+            </div>
+            <div class="offcanvas-body">
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                    <span id="usuario-logueado">Hola, Usuario</span>
+                    <button class="btn btn-outline-light btn-sm" id="logout">Cerrar sesión</button>
+                </div>
+                <hr class="text-white">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#accounts">Cuentas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#debitCards">Tarjetas de Débito</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#transfers">Transferencias</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#dollar">Compra/Venta de Dólares</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#creditCards">Tarjeta de Crédito</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#payments">Cargar un gasto</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#investments">Inversiones</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div>
+        <section class="container py-4">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <ul class="nav nav-tabs mb-3">
+                        <li class="nav-item">
+                            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#loginFormContainer"
+                                type="button">Iniciar Sesión</button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#registerFormContainer"
+                                type="button">Registrarse</button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <!-- FORMULARIO DE LOGIN -->
+                        <div class="tab-pane fade show active" id="loginFormContainer">
+                            <form id="loginForm">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="loginDni" placeholder="DNI" required>
+                                    <label for="loginDni">DNI</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="password" class="form-control" id="loginPassword"
+                                        placeholder="Contraseña" required>
+                                    <label for="loginPassword">Contraseña</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">Ingresar</button>
+                            </form>
+                        </div>
+
+                        <!-- FORMULARIO DE REGISTRO -->
+                        <div class="tab-pane fade" id="registerFormContainer">
+                            <form id="registerForm">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="registerName" placeholder="Nombre"
+                                        required>
+                                    <label for="registerName">Nombre</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="registerLastName" placeholder="Apellido"
+                                        required>
+                                    <label for="registerLastName">Apellido</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="registerDni" placeholder="DNI" required>
+                                    <label for="registerDni">DNI</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="email" class="form-control" id="registerEmail"
+                                        placeholder="Correo electrónico" required>
+                                    <label for="registerEmail">Correo electrónico</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="password" class="form-control" id="registerPassword"
+                                        placeholder="Contraseña" required>
+                                    <label for="registerPassword">Contraseña</label>
+                                </div>
+                                <button type="submit" class="btn btn-success w-100">Crear cuenta</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div>
+        <section id="accounts" class="border rounded shadow-sm p-4 container my-5">
+            <h2 class="mb-4">Mis Cuentas</h2>
+
+            <div class="row">
+                <!-- Ejemplo de una card para caja de ahorro en pesos -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Caja de Ahorro en Pesos</h5>
+                            <p class="card-text mb-1"><strong>Moneda:</strong> ARS</p>
+                            <p class="card-text mb-1"><strong>Saldo:</strong> $120.000</p>
+                            <p class="card-text mb-1"><strong>Descubierto disponible:</strong> $5.000</p>
+                            <p class="card-text mb-1"><strong>Descubierto usado:</strong> $2.000</p>
+                            <p class="card-text mb-1"><strong>Alias:</strong> mi.cuenta.pesos</p>
+                            <p class="card-text mb-3"><strong>CBU:</strong> 0123456789012345678901</p>
+                            <div class="d-grid">
+                                <button class="btn btn-outline-primary btn-sm">Ver movimientos</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ejemplo de una card para caja de ahorro en dólares -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Caja de Ahorro en Dólares</h5>
+                            <p class="card-text mb-1"><strong>Moneda:</strong> USD</p>
+                            <p class="card-text mb-1"><strong>Saldo:</strong> U$D 200</p>
+                            <p class="card-text mb-1"><strong>Alias:</strong> mi.cuenta.dolares</p>
+                            <p class="card-text mb-3"><strong>CBU:</strong> 0987654321098765432109</p>
+                            <div class="d-grid">
+                                <button class="btn btn-outline-primary btn-sm">Ver movimientos</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="debitCards" class="border rounded shadow-sm p-4 container my-5">
+
+            <h2>Tarjetas de Débito</h2>
+
+            <!-- Selector de tarjeta -->
+            <div class="mb-3">
+                <label for="debitCardAccountSelect" class="form-label">Seleccionar caja de ahorro</label>
+                <select id="debitCardAccountSelect" class="form-select">
+                    <!-- Opciones a generar dinámicamente -->
+                </select>
+            </div>
+
+            <!-- Info de tarjeta -->
+            <div id="debitCardInfo" class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title" id="debitCardTitle">VISA •••• 1234</h5>
+
+                    <p class="mb-1">Nombre en tarjeta: <span id="debitCardHolder"></span></p>
+                    <p class="mb-2">Vencimiento: <span id="debitCardExpiry"></span></p>
+
+                    <!-- Número de tarjeta -->
+                    <div class="mb-2">
+                        <label for="debitCardNumber" class="form-label">Número de tarjeta</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="debitCardNumber" readonly>
+                            <button class="btn btn-outline-secondary" type="button" id="toggleDebitCardNumber">
+                                <i class="bi bi-eye" id="debitCardNumberIcon"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Código de seguridad -->
+                    <div class="mb-2">
+                        <label for="debitCardCvv" class="form-label">Código de seguridad</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="debitCardCvv" readonly>
+                            <button class="btn btn-outline-secondary" type="button" id="toggleDebitCvv">
+                                <i class="bi bi-eye" id="debitCvvIcon"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section id="transfers" class="border rounded shadow-sm p-4 container my-5">
+            <h2 class="mb-4">Transferencias</h2>
+
+            <form>
+                <div class="mb-3">
+                    <label for="transferOrigin" class="form-label">Cuenta de origen</label>
+                    <select id="transferOrigin" class="form-select">
+                        <option selected disabled>Seleccionar cuenta...</option>
+                        <!-- JS va a llenar esto con alias + moneda -->
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="transferAmount" class="form-label">Monto a transferir</label>
+                    <input type="number" id="transferAmount" class="form-control" placeholder="Ingrese el monto">
+                </div>
+
+                <div class="mb-3">
+                    <label for="transferDestiny" class="form-label">Destino (Alias o CBU)</label>
+                    <input type="text" id="transferDestiny" class="form-control" placeholder="Escriba alias o CBU">
+                </div>
+
+                <div class="mb-3">
+                    <label for="transferDestinysSelect" class="form-label">O seleccione un destinatario</label>
+                    <select id="transferDestinysSelect" class="form-select">
+                        <option selected disabled>Seleccione alias destino...</option>
+                        <!-- Por JS cargar alias de otros usuarios -->
+                    </select>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Realizar transferencia</button>
+                </div>
+            </form>
+        </section>
+
+        <section id="dollar" class="border rounded shadow-sm p-4 container my-5">
+            <h2 class="mb-4">Compra / Venta de Dólares</h2>
+
+            <div class="d-flex justify-content-between gap-3 mb-4 flex-wrap">
+                <div class="card text-white bg-success flex-fill" style="min-width: 300px; max-width: 48%;">
+                    <div class="card-body">
+                        <h5 class="card-title">Dólar Compra</h5>
+                        <p class="card-text display-6">$ 1150</p>
+                        <p class="card-text"><small>Precio al que el banco te compra dólares</small></p>
+                    </div>
+                </div>
+
+                <div class="card text-white bg-danger flex-fill" style="min-width: 300px; max-width: 48%;">
+                    <div class="card-body">
+                        <h5 class="card-title">Dólar Venta</h5>
+                        <p class="card-text display-6">$ 1200</p>
+                        <p class="card-text"><small>Precio al que el banco te vende dólares</small></p>
+                    </div>
+                </div>
+            </div>
+
+            <form>
+                <div class="mb-3">
+                    <label class="form-label">Operación</label>
+                    <select id="dollarOperation" class="form-select">
+                        <option selected disabled>Seleccione una opción</option>
+                        <option value="compra">Comprar dólares</option>
+                        <option value="venta">Vender dólares</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="pesosAccount" class="form-label">Cuenta en pesos</label>
+                    <select id="pesosAccount" class="form-select">
+                        <option selected disabled>Seleccionar cuenta...</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="dollarsAccount" class="form-label">Cuenta en dólares</label>
+                    <select id="dollarsAccount" class="form-select">
+                        <option selected disabled>Seleccionar cuenta...</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="dollarsAmount" class="form-label">Monto</label>
+                    <input type="number" id="dollarsAmount" class="form-control" placeholder="Ej: 100">
+                </div>
+
+                <div class="mb-3">
+                    <p><strong>Equivalente:</strong> <span id="dollarEquivalent">$0</span></p>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-success">Confirmar operación</button>
+                </div>
+            </form>
+        </section>
+
+
+        <section id="creditCards" class="border rounded shadow-sm p-4 container my-5">
+
+            <h2>Tarjetas de Crédito</h2>
+
+            <!-- Selector de tarjeta -->
+            <div class="mb-3">
+                <label for="creditCardSelect" class="form-label">Seleccionar tarjeta</label>
+                <select id="creditCardSelect" class="form-select">
+                    <!-- Opciones a generar dinámicamente -->
+                </select>
+            </div>
+
+            <!-- Info de tarjeta -->
+            <div id="creditCardInfo" class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title" id="creditCardTitle">VISA •••• 1234</h5>
+
+                    <p class="mb-1">Nombre en tarjeta: <span id="creditCardHolder"></span></p>
+                    <p class="mb-1">Vencimiento: <span id="creditCardExpiry"></span></p>
+                    <p class="mb-1">Fecha del próximo cierre: <span id="creditCardClosingDate"></span></p>
+                    <p class="mb-1">Saldo adeudado: $<span id="creditCardBalance"></span></p>
+                    <p class="mb-2">Fecha de vencimiento: <span id="creditCardBalanceExpiry"></span></p>
+
+                    <!-- Número de tarjeta -->
+                    <div class="mb-2">
+                        <label for="cardNumber" class="form-label">Número de tarjeta</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="cardNumber" readonly>
+                            <button class="btn btn-outline-secondary" type="button" id="toggleCardNumber">
+                                <i class="bi bi-eye" id="cardNumberIcon"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Código de seguridad -->
+                    <div class="mb-2">
+                        <label for="cardCvv" class="form-label">Código de seguridad</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="cardCvv" readonly>
+                            <button class="btn btn-outline-secondary" type="button" id="toggleCvv">
+                                <i class="bi bi-eye" id="cvvIcon"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Formulario de pago -->
+            <div id="creditCardPaymentForm" class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Pagar tarjeta</h5>
+                    <div class="mb-3">
+                        <button class="btn btn-outline-primary me-2" id="payMinimumBtn">Pago mínimo</button>
+                        <button class="btn btn-outline-success me-2" id="payTotalBtn">Pago total</button>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">$</span>
+                        <input type="number" class="form-control" id="customPaymentAmount" placeholder="Monto">
+                        <button class="btn btn-outline-secondary" id="payCustomBtn">Pagar</button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section id="payments" class="container border rounded shadow p-4 my-4">
+            <h2>Cargar gasto</h2>
+
+            <!-- Selección de medio de pago -->
+            <div class="mb-3">
+                <label for="paymentMethodSelect" class="form-label">Seleccionar medio de pago</label>
+                <select class="form-select" id="paymentMethodSelect">
+                    <!-- Este select será llenado por los alumnos con tarjetas de débito y crédito -->
+                </select>
+            </div>
+
+            <!-- Nombre del comercio -->
+            <div class="mb-3">
+                <label for="storeNameInput" class="form-label">Nombre del comercio</label>
+                <input type="text" class="form-control" id="storeNameInput" placeholder="Ej: Supermercado Día">
+            </div>
+
+            <!-- Monto del gasto -->
+            <div class="mb-3">
+                <label for="expenseAmountInput" class="form-label">Monto del gasto</label>
+                <div class="input-group">
+                    <span class="input-group-text">$</span>
+                    <input type="number" class="form-control" id="expenseAmountInput" placeholder="Ej: 3500">
+                </div>
+            </div>
+
+            <!-- Cuotas (solo para tarjeta de crédito) -->
+            <div class="mb-3" id="installmentsContainer">
+                <label for="installmentsSelect" class="form-label">Cantidad de cuotas</label>
+                <select class="form-select" id="installmentsSelect">
+                    <option value="1">1 cuota</option>
+                    <option value="3">3 cuotas</option>
+                    <option value="6">6 cuotas</option>
+                    <option value="12">12 cuotas</option>
+                </select>
+                <div class="form-text">Este campo solo debe mostrarse si se selecciona una tarjeta de crédito.</div>
+            </div>
+
+            <!-- Botón para registrar gasto -->
+            <button class="btn btn-danger" id="registerExpenseButton">Registrar gasto</button>
+        </section>
+
+
+        <section id="investments" class="container border rounded shadow p-4 my-4">
+            <h2>Inversiones</h2>
+
+            <!-- Selección de cuenta -->
+            <div class="mb-3">
+                <label for="investmentAccountSelect" class="form-label">Seleccionar caja de ahorro de origen</label>
+                <select class="form-select" id="investmentAccountSelect">
+                    <!-- Cajas de ahorro a completar dinámicamente -->
+                </select>
+            </div>
+
+            <!-- Listado de fondos de inversión -->
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <div class="card text-white bg-success h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Fondo Conservador</h5>
+                            <p class="card-text">Interés: 2% mensual</p>
+                            <input type="radio" name="investmentFund" value="2" class="form-check-input me-2"
+                                id="fund1">
+                            <label for="fund1" class="form-check-label">Seleccionar</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-white bg-warning h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Fondo Moderado</h5>
+                            <p class="card-text">Interés: 5% mensual</p>
+                            <input type="radio" name="investmentFund" value="5" class="form-check-input me-2"
+                                id="fund2">
+                            <label for="fund2" class="form-check-label">Seleccionar</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-white bg-danger h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Fondo Agresivo</h5>
+                            <p class="card-text">Interés: 10% mensual</p>
+                            <input type="radio" name="investmentFund" value="10" class="form-check-input me-2"
+                                id="fund3">
+                            <label for="fund3" class="form-check-label">Seleccionar</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Monto a invertir -->
+            <div class="mb-3">
+                <label for="investmentAmount" class="form-label">Monto a invertir</label>
+                <div class="input-group">
+                    <span class="input-group-text">$</span>
+                    <input type="number" class="form-control" id="investmentAmount" placeholder="Ej: 10000">
+                </div>
+            </div>
+
+            <!-- Botón de invertir -->
+            <button class="btn btn-primary" id="investButton">Invertir</button>
+        </section>
+
+
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitle">Título del modal</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    </div>
+                    <div class="modal-body p-3" id="modalBody">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="classes/Client.js"></script>
+    <script src="classes/SavingsBank.js"></script>
+    <script src="classes/CreditCard.js"></script>
+    <script src="classes/DebitCard.js"></script>
+    <script src="classes/Movement.js"></script>
+    <script src="functions.js"></script>
+
+</body>
+
+</html>
+
