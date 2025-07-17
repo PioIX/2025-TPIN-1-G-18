@@ -12,3 +12,8 @@ class Movement{
             this.cuotes = cuotes;
     }
 }
+
+//Si yo genero un movimiento de dèbito
+new Movement("SUPERMERCADO", 1000);
+//Si yo genero un movimiento de crèdito
+new Movement("SUPERMERCADO", 1000, 3);
